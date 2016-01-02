@@ -4,6 +4,10 @@ namespace Simplia\Mailgun;
 use Psr\Http\Message\RequestInterface;
 
 class Factory {
+    /**
+     * @param RequestInterface $request
+     * @return Message
+     */
     public function convertRequestToMessage(RequestInterface $request) {
         parse_str($request->getBody(), $body);
         $message = new Message($body['Message-Id']);
@@ -31,5 +35,7 @@ class Factory {
         }
         $message->setSpam(isset($body['X-Mailgun-Sflag']) && $body['X-Mailgun-Sflag'] === 'yes');
         $message->setSpamScore(isset($body['X-Mailgun-Sscore']) ? (float)$body['X-Mailgun-Sscore'] : 0);
+
+        return $message;
     }
 }
