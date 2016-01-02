@@ -9,6 +9,57 @@ class Message {
     protected $replyTo;
     protected $fromName;
     protected $fromEmail;
+    protected $toName;
+    protected $toEmail;
+    protected $references;
+
+    /**
+     * @return mixed
+     */
+    public function getReferences() {
+        return $this->references;
+    }
+
+    /**
+     * @param mixed $references
+     * @return Message
+     */
+    public function setReferences($references) {
+        $this->references = $references;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getToName() {
+        return $this->toName;
+    }
+
+    /**
+     * @param mixed $toName
+     * @return Message
+     */
+    public function setToName($toName) {
+        $this->toName = $toName;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getToEmail() {
+        return $this->toEmail;
+    }
+
+    /**
+     * @param mixed $toEmail
+     * @return Message
+     */
+    public function setToEmail($toEmail) {
+        $this->toEmail = $toEmail;
+        return $this;
+    }
 
     /**
      * @return mixed
@@ -150,6 +201,22 @@ class Message {
             preg_match("~[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}~i", $from, $fromEmail);
         }
         $this->fromEmail = $fromEmail[0];
+        return $this;
+    }
+
+    /**
+     * @param mixed $to
+     * @return Message
+     */
+    public function setTo($to) {
+        if(preg_match("~(.+)<[^>]+>$~", $to, $toName)) {
+            $this->toName = $toName[1];
+        }
+        preg_match('~[^<]+@[^>]+$~', $to, $toEmail);
+        if(!$toEmail[0]) {
+            preg_match('~[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}~i', $to, $toEmail);
+        }
+        $this->toEmail = $toEmail[0];
         return $this;
     }
 

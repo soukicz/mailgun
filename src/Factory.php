@@ -24,6 +24,7 @@ class Factory {
         } else {
             $message->setFrom($body['from']);
         }
+        $message->setTo($body['To']);
         if(!empty($body['body-html'])) {
             $message->setBodyHtml($body['body-html']);
         }
@@ -33,6 +34,10 @@ class Factory {
         if(!empty($body['body-plain'])) {
             $message->setBodyPlain($body['body-plain']);
         }
+        if(!empty($body['References'])) {
+            $message->setReferences($body['References']);
+        }
+        $message->setDate((new \DateTime())->setTimestamp($body['timestamp']));
         $message->setSpam(isset($body['X-Mailgun-Sflag']) && $body['X-Mailgun-Sflag'] === 'yes');
         $message->setSpamScore(isset($body['X-Mailgun-Sscore']) ? (float)$body['X-Mailgun-Sscore'] : 0);
 
