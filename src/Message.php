@@ -301,18 +301,27 @@ class Message {
     }
 
     /**
-     * @return array
+     * @return Attachment[]
      */
     public function getAttachments() {
         return $this->attachments;
     }
 
     /**
-     * @param array $attachments
+     * @param Attachment[] $attachments
      * @return Message
      */
     public function setAttachments($attachments) {
         $this->attachments = $attachments;
+        return $this;
+    }
+
+    /**
+     * @param Attachment $attachment
+     * @return Message
+     */
+    public function addAttachment(Attachment $attachment) {
+        $this->attachments[] = $attachment;
         return $this;
     }
 

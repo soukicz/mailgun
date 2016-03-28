@@ -4,6 +4,12 @@ namespace Simplia\Mailgun;
 use Psr\Http\Message\RequestInterface;
 
 class Factory {
+    protected $key;
+
+    function __construct($apiKey) {
+        $this->key = $apiKey;
+    }
+
     /**
      * @param RequestInterface $request
      * @return Message
@@ -41,6 +47,18 @@ class Factory {
         $message->setSpam(isset($body['X-Mailgun-Sflag']) && $body['X-Mailgun-Sflag'] === 'yes');
         $message->setSpamScore(isset($body['X-Mailgun-Sscore']) ? (float)$body['X-Mailgun-Sscore'] : 0);
 
+        if(isset($body['attachments'])) {
+            foreach (json_decode($body['attachments']) as $at) {
+                if($at->name == 'smime.p7s') {
+                    continue;
+                }
+                $attachment = new Attachment();
+                $attachment
+                    ->setName($at->name)
+                    ->setUrl(str_replace('https://', 'https://api:key-' . $this->key, $at->url));
+                $message->addAttachment($attachment);
+            }
+        }
         return $message;
     }
 }

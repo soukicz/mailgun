@@ -2,7 +2,7 @@
   "name": "simplia/mailgun",
   "description": "Mailgun API",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "MIT",
   "authors": [
     {
       "name": "Petr Soukup",
