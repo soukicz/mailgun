@@ -1,5 +1,5 @@
 {
-  "name": "simplia/mailgun",
+  "name": "soukicz/mailgun",
   "description": "Mailgun API",
   "minimum-stability": "stable",
   "license": "MIT",
