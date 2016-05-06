@@ -55,7 +55,7 @@ class Factory {
                 $attachment = new Attachment();
                 $attachment
                     ->setName($at->name)
-                    ->setUrl(str_replace('https://', 'https://api:key-' . $this->key, $at->url));
+                    ->setUrl(str_replace('https://', 'https://api:key-' . $this->key . '@', $at->url));
                 $message->addAttachment($attachment);
             }
         }
