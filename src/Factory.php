@@ -18,6 +18,8 @@ class Factory {
         parse_str($request->getBody(), $body);
         $message = new Message($body['Message-Id']);
 
+        $message->setSubject($body['Subject']);
+
         if(!empty($body['Reply-To'])) {
             $message->setReplyTo($body['Reply-To']);
         } elseif(!empty($body['Reply-to'])) {

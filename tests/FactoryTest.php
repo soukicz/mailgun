@@ -27,7 +27,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('', $message->getReplyTo());
         $this->assertEquals(0, $message->getSpamScore());
         $this->assertEquals('', $message->getStrippedHtml());
-        $this->assertEquals('', $message->getSubject());
+        $this->assertEquals('Feed s produkty', $message->getSubject());
         $this->assertEquals('', $message->getThreadIndex());
         $this->assertEquals('info@test.cz', $message->getToEmail());
         $this->assertEquals('', $message->getToName());
