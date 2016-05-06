@@ -1,5 +1,5 @@
 <?php
-namespace Simplia\Mailgun;
+namespace Soukicz\Mailgun;
 
 class Attachment {
 

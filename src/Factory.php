@@ -1,5 +1,5 @@
 <?php
-namespace Simplia\Mailgun;
+namespace Soukicz\Mailgun;
 
 use Psr\Http\Message\RequestInterface;
 

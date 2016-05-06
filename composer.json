@@ -18,12 +18,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Simplia\\Mailgun\\": "src/"
+      "Soukicz\\Mailgun\\": "src/"
     }
   },
   "autoload-dev": {
     "classmap": [
-      "tests/SimpliaTests"
+      "tests/SoukiczTests"
     ]
   }
 }
