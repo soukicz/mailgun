@@ -199,7 +199,7 @@ class Message {
         if(!preg_match("~[^<]+@[^>]+$~", $from, $fromEmail)) {
             preg_match('~[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}~i', $from, $fromEmail);
         }
-        $this->fromEmail = $fromEmail[0];
+        $this->fromEmail = ltrim(rtrim($fromEmail[0], '>'), '<');
         return $this;
     }
 
@@ -215,7 +215,7 @@ class Message {
         if(!$toEmail[0]) {
             preg_match('~[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}~i', $to, $toEmail);
         }
-        $this->toEmail = $toEmail[0];
+        $this->toEmail = ltrim(rtrim($toEmail[0], '>'), '<');
         return $this;
     }
 
