@@ -193,13 +193,9 @@ class Message {
      * @return Message
      */
     public function setFrom($from) {
-        if(preg_match("~(.+)<[^>]+>$~", $from, $fromName)) {
-            $this->fromName = trim($fromName[1]);
-        }
-        if(!preg_match("~[^<]+@[^>]+$~", $from, $fromEmail)) {
-            preg_match('~[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}~i', $from, $fromEmail);
-        }
-        $this->fromEmail = ltrim(rtrim($fromEmail[0], '>'), '<');
+        $address = imap_rfc822_parse_adrlist($from, '');
+        $this->fromName = isset($address[0]->personal) ? trim($address[0]->personal, '"') : null;
+        $this->fromEmail = $address[0]->mailbox . '@' . $address[0]->host;
         return $this;
     }
 
@@ -208,14 +204,9 @@ class Message {
      * @return Message
      */
     public function setTo($to) {
-        if(preg_match("~(.+)<[^>]+>$~", $to, $toName)) {
-            $this->toName = $toName[1];
-        }
-        preg_match('~[^<]+@[^>]+$~', $to, $toEmail);
-        if(!$toEmail[0]) {
-            preg_match('~[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}~i', $to, $toEmail);
-        }
-        $this->toEmail = ltrim(rtrim($toEmail[0], '>'), '<');
+        $address = imap_rfc822_parse_adrlist($to, '');
+        $this->toName = isset($address[0]->personal) ? trim($address[0]->personal, '"') : null;
+        $this->toEmail = $address[0]->mailbox . '@' . $address[0]->host;
         return $this;
     }
 
