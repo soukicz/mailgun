@@ -193,6 +193,7 @@ class Message {
      * @return Message
      */
     public function setFrom($from) {
+        $from = str_replace("\t", ' ', $from);
         $address = imap_rfc822_parse_adrlist($from, '');
         $this->fromName = isset($address[0]->personal) ? trim($address[0]->personal, '"') : null;
         $this->fromEmail = $address[0]->mailbox . '@' . $address[0]->host;
@@ -204,6 +205,7 @@ class Message {
      * @return Message
      */
     public function setTo($to) {
+        $to = str_replace("\t", ' ', $to);
         $address = imap_rfc822_parse_adrlist($to, '');
         $this->toName = isset($address[0]->personal) ? trim($address[0]->personal, '"') : null;
         $this->toEmail = $address[0]->mailbox . '@' . $address[0]->host;
