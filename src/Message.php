@@ -183,7 +183,8 @@ class Message {
      * @return Message
      */
     public function setReplyTo($replyTo) {
-        $this->replyTo = $replyTo;
+        $address = Decoder::getAddress($replyTo);
+        $this->replyTo = $address->getEmail();
         return $this;
     }
 
@@ -193,10 +194,9 @@ class Message {
      * @return Message
      */
     public function setFrom($from) {
-        $from = str_replace("\t", ' ', $from);
-        $address = imap_rfc822_parse_adrlist($from, '');
-        $this->fromName = isset($address[0]->personal) ? trim($address[0]->personal, '"') : null;
-        $this->fromEmail = $address[0]->mailbox . '@' . $address[0]->host;
+        $address = Decoder::getAddress($from);
+        $this->fromName = $address->getName();
+        $this->fromEmail = $address->getEmail();
         return $this;
     }
 
@@ -205,10 +205,9 @@ class Message {
      * @return Message
      */
     public function setTo($to) {
-        $to = str_replace("\t", ' ', $to);
-        $address = imap_rfc822_parse_adrlist($to, '');
-        $this->toName = isset($address[0]->personal) ? trim($address[0]->personal, '"') : null;
-        $this->toEmail = $address[0]->mailbox . '@' . $address[0]->host;
+        $address = Decoder::getAddress($to);
+        $this->toName = $address->getName();
+        $this->toEmail = $address->getEmail();
         return $this;
     }
 
