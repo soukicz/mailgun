@@ -37,6 +37,10 @@ class Factory {
             $message->setBodyHtml($body['body-html']);
         }
         if(!empty($body['stripped-html'])) {
+            $body['stripped-html'] = html_entity_decode($body['stripped-html']);
+            if(strpos($body['stripped-html'], 'ĂĄ') !== false && stripos($body['stripped-html'], 'charset=iso-8859-2')) {
+                $body['stripped-html'] = iconv('UTF-8', 'ISO-8859-2', $body['stripped-html']);
+            }
             $message->setStrippedHtml($body['stripped-html']);
         }
         if(!empty($body['body-plain'])) {
