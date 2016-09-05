@@ -40,6 +40,8 @@ class Factory {
             $body['stripped-html'] = html_entity_decode($body['stripped-html']);
             if(strpos($body['stripped-html'], 'ĂĄ') !== false && stripos($body['stripped-html'], 'charset=iso-8859-2')) {
                 $body['stripped-html'] = iconv('UTF-8', 'ISO-8859-2', $body['stripped-html']);
+            } elseif(strpos($body['stripped-html'], 'Ăˇ') !== false && stripos($body['stripped-html'], 'charset=windows-1250')) {
+                $body['stripped-html'] = iconv('UTF-8', 'CP1250', $body['stripped-html']);
             }
             $message->setStrippedHtml($body['stripped-html']);
         }
