@@ -7,7 +7,7 @@ class Decoder {
      * @param string $input RFC822 address string
      * @return Address
      */
-    public static function getAddress(string $input) {
+    public static function getAddress($input) {
         $input = str_replace("\t", ' ', $input);
         $address = imap_rfc822_parse_adrlist($input, '');
         $name = isset($address[0]->personal) ? trim($address[0]->personal, '"') : null;
