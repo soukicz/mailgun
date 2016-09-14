@@ -32,7 +32,9 @@ class Factory {
         } else {
             $message->setFrom($body['from']);
         }
-        $message->setTo($body['To']);
+        if(isset($body['To'])) {
+            $message->setTo($body['To']);
+        }
         if(!empty($body['body-html'])) {
             $message->setBodyHtml($body['body-html']);
         }
