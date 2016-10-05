@@ -41,18 +41,18 @@ class Factory {
         if(!empty($body['stripped-html'])) {
             $body['stripped-html'] = html_entity_decode($body['stripped-html']);
             if(strpos($body['stripped-html'], 'ĂĄ') !== false && stripos($body['stripped-html'], 'charset=iso-8859-2')) {
-                $body['stripped-html'] = iconv('UTF-8', 'ISO-8859-2', $body['stripped-html']);
+                $body['stripped-html'] = iconv('UTF-8', 'ISO-8859-2//TRANSLIT', $body['stripped-html']);
             } elseif(strpos($body['stripped-html'], 'Ăˇ') !== false && stripos($body['stripped-html'], 'charset=windows-1250')) {
-                $body['stripped-html'] = iconv('UTF-8', 'CP1250', $body['stripped-html']);
+                $body['stripped-html'] = iconv('UTF-8', 'CP1250//TRANSLIT', $body['stripped-html']);
             }
             $message->setStrippedHtml($body['stripped-html']);
         }
         if(!empty($body['body-plain'])) {
             if(isset($body['stripped-html'])) {
                 if(strpos($body['body-plain'], 'ĂĄ') !== false && stripos($body['stripped-html'], 'charset=iso-8859-2')) {
-                    $body['body-plain'] = iconv('UTF-8', 'ISO-8859-2', $body['body-plain']);
+                    $body['body-plain'] = iconv('UTF-8', 'ISO-8859-2//TRANSLIT', $body['body-plain']);
                 } elseif(strpos($body['body-plain'], 'Ăˇ') !== false && stripos($body['stripped-html'], 'charset=windows-1250')) {
-                    $body['body-plain'] = iconv('UTF-8', 'CP1250', $body['body-plain']);
+                    $body['body-plain'] = iconv('UTF-8', 'CP1250//TRANSLIT', $body['body-plain']);
                 }
             }
             $message->setBodyPlain($body['body-plain']);
