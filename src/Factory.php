@@ -51,7 +51,7 @@ class Factory {
             if(isset($body['stripped-html'])) {
                 if(strpos($body['body-plain'], 'ĂĄ') !== false && stripos($body['stripped-html'], 'charset=iso-8859-2')) {
                     $body['body-plain'] = iconv('UTF-8', 'ISO-8859-2', $body['body-plain']);
-                } elseif(strpos($body['stripped-html'], 'Ăˇ') !== false && stripos($body['stripped-html'], 'charset=windows-1250')) {
+                } elseif(strpos($body['body-plain'], 'Ăˇ') !== false && stripos($body['stripped-html'], 'charset=windows-1250')) {
                     $body['body-plain'] = iconv('UTF-8', 'CP1250', $body['body-plain']);
                 }
             }
