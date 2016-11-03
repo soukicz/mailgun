@@ -32,4 +32,19 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('info@test.cz', $message->getToEmail());
         $this->assertEquals('', $message->getToName());
     }
+
+    function testSender() {
+        $factory = new Factory('key');
+
+        $message = $factory->convertRequestToMessage(new Request(
+            'POST',
+            '/',
+            [],
+            http_build_query(json_decode(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'message-sender.json'), true))
+        ));
+
+
+        $this->assertEquals('abc.de@example.org', $message->getFromEmail());
+        $this->assertEquals('Nikolka -', $message->getFromName());
+    }
 }
