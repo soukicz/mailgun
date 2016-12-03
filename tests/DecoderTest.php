@@ -15,4 +15,10 @@ class DecoderTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('novakova@novak.sk', $address->getEmail());
         $this->assertEquals('Ivana Nováková - novak.sk', $address->getName());
     }
+
+    function testComma() {
+        $address = Decoder::getAddress('Mgr. Petra Hrubá, DiS.' . "\t" . '<Hruba.Petulka@seznam.cz>');
+        $this->assertEquals('Hruba.Petulka@seznam.cz', $address->getEmail());
+        $this->assertEquals('Mgr. Petra Hrubá DiS.', $address->getName());
+    }
 }
