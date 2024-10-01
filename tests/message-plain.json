@@ -14,6 +14,7 @@
   "Mime-Version": "1.0",
   "recipient": "test.1.test@test.test.cz",
   "Spamdiagnosticoutput": "1:23",
+  "X-Mailgun-Sflag": "Yes",
   "Message-Id": "<a4aa0f7a-2a17-3e86-3a89-ec674e35d63a@test.cz>",
   "sender": "info@test.cz",
   "X-Mailgun-Incoming": "Yes",

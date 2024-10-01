@@ -61,7 +61,7 @@ class Factory {
             $message->setReferences($body['References']);
         }
         $message->setDate((new \DateTime())->setTimestamp($body['timestamp']));
-        $message->setSpam(isset($body['X-Mailgun-Sflag']) && $body['X-Mailgun-Sflag'] === 'yes');
+        $message->setSpam(isset($body['X-Mailgun-Sflag']) && $body['X-Mailgun-Sflag'] === 'Yes');
         $message->setSpamScore(isset($body['X-Mailgun-Sscore']) ? (float)$body['X-Mailgun-Sscore'] : 0);
 
         if(isset($body['attachments'])) {
